@@ -3,6 +3,7 @@
 이 레파지토리는 "원티드 프리온보딩 프론트엔드 과정" 선발 과제 제출용 저장소입니다.
 
 ## 배포 링크
+[배포링크](https://yoon1257.github.io/wanted-pre-onboarding-frontend/)
 
 ## 실행 방법
 
