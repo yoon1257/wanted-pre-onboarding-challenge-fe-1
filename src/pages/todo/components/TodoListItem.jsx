@@ -5,8 +5,8 @@ import { main } from "../../../styles/theme";
 
 const TodoListItem = ({ id, todo, completed, getTodos }) => {
   const [update, setUpdate] = useState(false);
-  const [updateTodoInput, setUpdateTodoInput] = useState(todo);
-  const [updateCompleted, setUpdateCompleted] = useState(completed);
+  const [TodoInput, setTodoInput] = useState(todo);
+  const [isCompleted, setIsCompleted] = useState(completed);
 
   const deleteTodo = () => {
     fetch(`${API.TODOS}/${id}`, {
@@ -25,8 +25,8 @@ const TodoListItem = ({ id, todo, completed, getTodos }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        todo: updateTodoInput,
-        isCompleted: updateCompleted,
+        todo: TodoInput,
+        isCompleted: isCompleted,
       }),
     })
       .then(() => getTodos())
@@ -34,24 +34,25 @@ const TodoListItem = ({ id, todo, completed, getTodos }) => {
   };
 
   const updateCancel = () => {
-    setUpdateTodoInput(todo);
-    setUpdateCompleted(completed);
+    setTodoInput(todo);
+    setIsCompleted(completed);
     setUpdate(false);
   };
   return (
     <>
       {update ? (
         <TodoListItemContainer>
-          <div>
+          <div className={isCompleted ? "completed " : ""}>
             <input
               type="checkbox"
-              defaultChecked={updateCompleted}
-              onChange={() => setUpdateCompleted(!updateCompleted)}
+              Checked={isCompleted}
+              onChange={() => setIsCompleted(true)}
             />
             <input
+              className="textInput"
               type="text"
-              onChange={(e) => setUpdateTodoInput(e.target.value)}
-              value={updateTodoInput}
+              onChange={(e) => setTodoInput(e.target.value)}
+              value={TodoInput}
               autoFocus
             />
           </div>
@@ -68,7 +69,7 @@ const TodoListItem = ({ id, todo, completed, getTodos }) => {
         <TodoListItemContainer>
           <div>
             <input type="checkbox" checked={completed} readOnly />
-            <span updateCompleted={updateCompleted}>{todo} </span>
+            <span isCompleted={isCompleted}>{todo} </span>
           </div>
           <div>
             <button className="edit" onClick={() => setUpdate(true)}>
@@ -89,6 +90,15 @@ const TodoListItemContainer = styled.div`
   margin: 10px auto;
   padding: 5px;
   width: 90%;
+
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+  .textInput {
+    width: 300px;
+    padding: 5px;
+  }
   .edit {
     padding: 5px;
     background-color: transparent;
