@@ -21,7 +21,7 @@ const Todo = () => {
         setTodoList(data.reverse());
       });
   };
-  const addTodo = (e) => {
+  const createTodo = (e) => {
     e.preventDefault();
     fetch(`${API.TODOS}`, {
       method: "POST",
@@ -41,7 +41,7 @@ const Todo = () => {
         <BsFillMoonStarsFill className="icon" />
         <h1>Todo List</h1>
       </div>
-      <form className="todo-insert" onSubmit={addTodo}>
+      <form className="todo-insert" onSubmit={createTodo}>
         <input
           type="text"
           placeholder="할일을 입력해주세요"
@@ -52,13 +52,13 @@ const Todo = () => {
         <button type="submit">+</button>
       </form>
       <div className="todo-list">
-        {todoList.map((item) => {
+        {todoList.map((list) => {
           return (
             <TodoListItem
-              key={item.id}
-              id={item.id}
-              todo={item.todo}
-              completed={item.isCompleted}
+              key={list.id}
+              id={list.id}
+              todo={list.todo}
+              completed={list.isCompleted}
               getTodos={getTodos}
             />
           );
