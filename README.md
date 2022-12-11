@@ -7,8 +7,8 @@
 ## 실행 방법
 
 ```
-$ npm install
-$ npm start
+$ yarn install
+$ yarn start
 ```
 
 
@@ -25,3 +25,5 @@ $ npm start
 
 
 ## 주요 기능
+1️⃣ 로그인/ 회원가입
+2️⃣ Todo 
